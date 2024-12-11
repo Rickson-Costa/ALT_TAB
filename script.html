@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alternador de Kanbans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+    </style>
+    <script>
+        // Lista de URLs para alternar
+        const sites = [
+            "http://10.0.1.188/test_wsgi/?unid_int=1",
+            "http://10.0.1.188/test_wsgi/?unid_int=2",
+            "http://10.0.1.188/test_wsgi/?unid_int=3",
+            "http://10.0.1.188/test_wsgi/?unid_int=6",
+            "http://10.0.1.188/test_wsgi/?unid_int=7",
+            "http://10.0.1.188/test_wsgi/?unid_int=8",
+            "http://10.0.1.188/test_wsgi/?unid_int=9",
+            "http://10.0.1.188/test_wsgi/?unid_int=10"
+        ];
+
+        let currentSite = 0;
+
+        // Função para alternar entre os sites
+        function rotateSites() {
+            const iframe = document.getElementById("kanbanFrame");
+            iframe.src = sites[currentSite]; // Atualiza o iframe com o próximo site
+            currentSite = (currentSite + 1) % sites.length; // Avança para o próximo site na lista
+        }
+
+        // Alterna a cada 10 segundos
+        setInterval(rotateSites, 10000);
+
+        // Carrega o primeiro site ao abrir a página
+        window.onload = rotateSites;
+    </script>
+</head>
+<body>
+    <iframe id="kanbanFrame"></iframe>
+</body>
+</html>
